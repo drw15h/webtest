@@ -1,0 +1,47 @@
+<html>
+<p>
+@echo off<br>
+title Sort<br>
+setlocal EnableDelayedExpansion<br>
+<br>
+set sortlist=<br>
+set totalist=0<br>
+cls<br>
+echo Add positive number (D if done)<br>
+echo.<br>
+echo.<br>
+:list<br>
+set newlist=<br>
+set/p newlist=Number:<br>
+if not defined newlist goto list<br>
+if !newlist! == D goto sort<br>
+set sortlist=!sortlist! !newlist!<br>
+set/a totalist=!totalist!+1<br>
+goto list<br>
+<br>
+cls<br>
+echo Sorting...<br>
+set perfect=<br>
+:sort<br>
+set sortedlist=<br>
+set high=0<br>
+for %%a in (!sortlist!) do (<br>
+    if %%a GTR !high! set high=%%a<br>
+)<br>
+for %%a in (!sortlist!) do (<br>
+    if not %%a == !high! (set sortedlist=%%a !sortedlist!) else set perfect=!perfect! %%a <br>
+)<br>
+set sortlist=!sortedlist!<br>
+if not !totalist! == 0 (set/a totalist=!totalist!-1) & goto sort<br>
+<br>
+cls<br>
+for %%a in (!perfect!) do (<br>
+    echo %%a<br>
+)<br>
+echo.<br>
+echo Sorted successfully...<br>
+echo.<br>
+pause<br>
+exit<br>
+</p>
+</html>
